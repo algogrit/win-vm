@@ -31,3 +31,6 @@ virt-install \
   --features kvm_hidden=on \
   --check all=off \
   --noautoconsole
+
+# Install the driver: viostor\w11\amd64 inside Windows Installer for recognizing the disk
+# Once Windows is installed, go to the VirtIO CD drive and run: `virtio-win-guest-tools.exe`
