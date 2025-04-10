@@ -37,7 +37,7 @@
           <InstallFrom>
             <MetaData wcm:action="add">
               <Key>/IMAGE/INDEX</Key>
-              <Value>6</Value> <!-- Windows 11 Home -->
+              <Value>6</Value>
             </MetaData>
           </InstallFrom>
           <InstallTo>
