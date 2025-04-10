@@ -57,5 +57,9 @@ virt-install \
   --channel spicevmc \
   --sound ich9 \
   --controller type=usb,model=qemu-xhci \
-  --network network=default,model=virtio \
+  --network network=macvtap-net,model=virtio \
   --noautoconsole
+
+# Install the drivers: `viostor\w11\amd64` & `NetKVM\w11\amd64` inside Windows Installer for recognizing the disk & getting network
+  # - https://sysguides.com/install-a-windows-11-virtual-machine-on-kvm
+# Once Windows is installed, go to the VirtIO CD drive and run: `virtio-win-guest-tools.exe`
