@@ -49,7 +49,7 @@ virt-install \
   --boot cdrom,hd,menu=on \
   --cdrom "$ISO_PATH" \
   --disk path="$VIRTIO_PATH",device=cdrom \
-  --disk path="$DISK_PATH",format=qcow2,bus=scsi \
+  --disk path="$DISK_PATH",format=qcow2,bus=virtio \
   --disk path="$FLOPPY_IMAGE_PATH",device=floppy \
   --controller type=scsi,model=virtio-scsi \
   --graphics spice \
