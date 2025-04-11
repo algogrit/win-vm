@@ -3,12 +3,20 @@
 set -e
 
 # === Config ===
-VM_NAME="win11-virt"
-ISO_PATH="$HOME/windows/isos/Win11_24H2_English_x64.iso"
-VIRTIO_PATH="$HOME/windows/isos/virtio-win-0.1.271.iso"
-UNATTEND_XML="$HOME/windows/autounattend.xml"
-FLOPPY_IMAGE_PATH=~/windows/tmp/autounattend.vfd
-DISK_PATH="$HOME/windows/vms/${VM_NAME}.qcow2"
+VM_NAME="aditi"
+BASE_PATH=$HOME/windows
+
+ISO_PATH="$BASE_PATH/isos/Win11_24H2_English_x64.iso"
+VIRTIO_PATH="$BASE_PATH/isos/virtio-win-0.1.271.iso"
+
+UNATTEND_XML="$BASE_PATH/autounattend.xml"
+FLOPPY_IMAGE_PATH=$BASE_PATH/tmp/autounattend.vfd
+
+POST_INSTALL_IMAGE_PATH=$BASE_PATH/tmp/post_install.iso
+POST_INSTALL_SCRIPTS_PATH=$BASE_PATH/post-install
+
+DISK_PATH="$BASE_PATH/vms/${VM_NAME}.qcow2"
+
 DISK_SIZE="256G"
 RAM_MB=32768
 CPU_CORES=12
@@ -25,6 +33,9 @@ mkdir -p ~/windows/tmp
 rm -rf $FLOPPY_IMAGE_PATH
 mkfs.vfat -C $FLOPPY_IMAGE_PATH 1440
 mcopy -i $FLOPPY_IMAGE_PATH "$UNATTEND_XML" ::/autounattend.xml
+
+# === Create image with post-install scripts ===
+genisoimage -o $POST_INSTALL_IMAGE_PATH $POST_INSTALL_SCRIPTS_PATH
 
 # === Create VM disk ===
 qemu-img create -f qcow2 "$DISK_PATH" "$DISK_SIZE"
@@ -50,6 +61,7 @@ virt-install \
   --cdrom "$ISO_PATH" \
   --disk path="$VIRTIO_PATH",device=cdrom \
   --disk path="$DISK_PATH",format=qcow2,bus=virtio \
+  --disk path="$POST_INSTALL_IMAGE_PATH",device=cdrom \
   --disk path="$FLOPPY_IMAGE_PATH",device=floppy \
   --controller type=scsi,model=virtio-scsi \
   --graphics spice \
