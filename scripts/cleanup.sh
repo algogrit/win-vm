@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-VM_NAME="win11-virt"
+VM_NAME="aditi"
 DISK_PATH="$HOME/windows/vms/${VM_NAME}.qcow2"
 
-virsh destroy win11-virt
+virsh destroy $VM_NAME
 
-virsh undefine win11-virt --remove-all-storage
+virsh undefine $VM_NAME --remove-all-storage
 
 rm -rf $DISK_PATH
 
