@@ -83,20 +83,6 @@
     </component>
   </settings>
 
-  <settings pass="windowsPE">
-    <component name="Microsoft-Windows-PnpCustomizationsWinPE" ...>
-      <DriverPaths>
-        <PathAndCredentials wcm:action="add" wcm:key="1">
-          <Path>e:\virtio\viostor\w11\amd64</Path>
-        </PathAndCredentials>
-        <PathAndCredentials wcm:action="add" wcm:key="2">
-          <Path>e:\virtio\netkvm\w11\amd64</Path>
-        </PathAndCredentials>
-      </DriverPaths>
-    </component>
-  </settings>
-
-
   <settings pass="oobeSystem">
     <component name="Microsoft-Windows-International-Core" processorArchitecture="amd64"
       publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS"
